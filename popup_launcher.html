@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Launching...</title>
+    <script>
+        function openPopup() {
+            let targetURL = "https://paulpccu.github.io/Crownscript/script.html"; // Update this to the actual page
+            let params = new URLSearchParams(window.location.search);
+            
+            // Add Vicidial lead variables to the URL
+            if (params.has("first_name")) {
+                targetURL += "?first_name=" + params.get("first_name");
+            }
+
+            // Open in a new tab
+            window.open(targetURL, "_blank");
+
+            // Close the popup page itself after 1 second
+            setTimeout(() => window.close(), 1000);
+        }
+
+        window.onload = openPopup;
+    </script>
+</head>
+<body>
+    <p>If the popup didn't open, please allow popups for this site.</p>
+</body>
+</html>
