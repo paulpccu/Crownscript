@@ -57,7 +57,7 @@
 </p>
 <p>
     <u>I<strong>F YES PITCH TOP SPOTS...REMEMBER TO MAXIMIZE  LEAD</strong></u>
-    <strong><u>(--A--security_phrase--B--)</u></strong>
+    <strong><u>(SECUTIRY)</u></strong>
 </p>
 <p>
     GREAT, THE TOP LEVELS TO  SUPPORT ARE GOLD AT $105, SILVER AT $95 AND THE
@@ -322,3 +322,25 @@
     <br/>
     <br/>
 </p>
+
+
+<script>
+function getUrlParams() {
+    let params = {};
+    window.location.search
+        .substring(1)
+        .split("&")
+        .forEach(pair => {
+            let [key, value] = pair.split("=");
+            params[key] = decodeURIComponent(value || "");
+        });
+    return params;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    let params = getUrlParams();
+    document.body.innerHTML = document.body.innerHTML.replace(/--A--security_phrase--B--/g, params.security_phrase || "Unknown Security Phrase")
+                                                     .replace(/--A--first_name--B--/g, params.first_name || "Unknown First Name")
+                                                     .replace(/--A--last_name--B--/g, params.last_name || "Unknown Last Name");
+});
+</script>
