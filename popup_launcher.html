@@ -5,13 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Launching...</title>
     <script>
+        // Debugging: Show the URL parameters on the page
+        document.write("<p>Debug URL Parameters: " + window.location.search + "</p>");
+
         function openPopup() {
-            let targetURL = "https://paulpccu.github.io/Crownscript/posat4t.html"; // Update this to the actual page
+            let targetURL = "https://paulpccu.github.io/Crownscript/posat4t.html"; // Update this to the actual script page
             let params = new URLSearchParams(window.location.search);
-            
-            // Add Vicidial lead variables to the URL
+
+            // Create an array to store parameters
+            let queryParams = [];
+
+            // Add Vicidial lead variables to the URL if they exist
             if (params.has("first_name")) {
-                targetURL += "?first_name=" + params.get("first_name");
+                queryParams.push("first_name=" + encodeURIComponent(params.get("first_name")));
+            }
+            if (params.has("last_name")) {
+                queryParams.push("last_name=" + encodeURIComponent(params.get("last_name")));
+            }
+            if (params.has("security_phrase")) {
+                queryParams.push("amount=" + encodeURIComponent(params.get("security_phrase")));
+            }
+            if (params.has("phone_number")) {
+                queryParams.push("phone=" + encodeURIComponent(params.get("phone_number")));
+            }
+            if (params.has("lead_id")) {
+                queryParams.push("lead_id=" + encodeURIComponent(params.get("lead_id")));
+            }
+
+            // Append parameters to the target URL if any exist
+            if (queryParams.length > 0) {
+                targetURL += "?" + queryParams.join("&");
             }
 
             // Open in a new tab
@@ -21,6 +44,7 @@
             setTimeout(() => window.close(), 1000);
         }
 
+        // Execute on page load
         window.onload = openPopup;
     </script>
 </head>
