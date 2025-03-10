@@ -5,32 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Launching...</title>
  <script>
-    // Debug: Show received URL parameters
-    document.write("<p>Debug URL Parameters: " + window.location.search + "</p>");
-
     function openPopup() {
         let targetURL = "https://paulpccu.github.io/Crownscript/posat4t.html";
         let params = new URLSearchParams(window.location.search);
-
-        // Pass all received parameters to the new window
         let queryParams = [];
+
         for (let [key, value] of params.entries()) {
             queryParams.push(key + "=" + encodeURIComponent(value));
         }
 
-        // Append parameters to the target URL
         if (queryParams.length > 0) {
             targetURL += "?" + queryParams.join("&");
         }
 
+        // Debugging - Show the final URL before opening
+        document.write("<p>Opening Popup with URL: <br>" + targetURL + "</p>");
+
         // Open in a new tab
         window.open(targetURL, "_blank");
 
-        // Close the popup page itself after 1 second
+        // Close the popup launcher after 1 second
         setTimeout(() => window.close(), 1000);
     }
 
-    // Execute on page load
     window.onload = openPopup;
 </script>
 
