@@ -7,16 +7,43 @@
     <center><b><font size="5.5">T4T</b></font></center>
     <u><b><center>POLICE OFFICERS SUPPORT ASSOCIATION</center></b></u>
   
-    <p>HELLO, MR/MRS <b>--A--first_name--B-- --A--last_name--B--</b>, THIS IS (CALLER'S FULL NAME) CALLING FOR THE POLICE OFFICERS SUPPORT ASSOCIATION PAC</p>
+    <p>HELLO, MR/MRS <b id="first_name">Loading...</b> <b id="last_name">Loading...</b>, THIS IS (CALLER'S FULL NAME) CALLING FOR THE POLICE OFFICERS SUPPORT ASSOCIATION PAC</p>
     
     <p id="SCRIPTS"></p>
     <p>HOW ARE YOU...GREAT!!!</p>
 
     <p>THE REASON FOR THE <b>RECORDED</b> CALL IS TO THANK YOU FOR YOUR PREVIOUS SUPPORT TO THE PAC LAST YEAR. IT MADE A BIG DIFFERENCE FOR THE OFFICERS. I'M REACHING OUT TODAY TO LET YOU KNOW THAT THE <b>527 ASSOCIATION</b> IS ONCE AGAIN CONDUCTING ITS <b>YEARLY</b> BENEFIT DRIVE. THE GOAL OF THE DRIVE IS <b>TO SUPPORT <b>LEGISLATORS</b> WHO WORK TO KEEP OUR <span style="background-color: #66ff33">COMMUNITIES SAFE</span>, AS WELL AS SUPPORT ASSISTANCE TO THE FAMILIES OF <span style="background-color: #66ff33">OFFICERS KILLED</span> IN THE LINE OF DUTY.</b></p>
 
-    <p><b>WE ARE REACHING OUT TOEVERYONE IN --A--city--B--,</b> AND I JUST WANTED TO ASK CAN THE ASSOCIATION COUNT ON YOUR ONE-TIME SUPPORT?</p>
+    <p><b>WE ARE REACHING OUT TO EVERYONE IN --A--city--B--,</b> AND I JUST WANTED TO ASK CAN THE ASSOCIATION COUNT ON YOUR ONE-TIME SUPPORT?</p>
 
-    <p>If YES...<b>REMEMBER TO MAXIMIZE LEAD <span style="background-color: #FFFF00">(--A--security_phrase--B--)</b></span></p>
+    <p>If YES...<b>REMEMBER TO MAXIMIZE LEAD <span style="background-color: #FFFF00" id="security_phrase_display">Loading...</span></b></p>
+
+    <script>
+        // Get URL parameters
+        let params = new URLSearchParams(window.location.search);
+        let debugMessage = "<h2>Debugging - Received Parameters:</h2>";
+
+        // Loop through all parameters and display them
+        for (let [key, value] of params.entries()) {
+            debugMessage += `<p>${key}: ${value}</p>`;
+        }
+
+        // Display debugging information at the top
+        document.body.insertAdjacentHTML("afterbegin", debugMessage);
+
+        // Insert data into the correct places in the script
+        document.addEventListener("DOMContentLoaded", function() {
+            if (params.has("first_name")) {
+                document.getElementById("first_name").textContent = params.get("first_name");
+            }
+            if (params.has("last_name")) {
+                document.getElementById("last_name").textContent = params.get("last_name");
+            }
+            if (params.has("security_phrase")) {
+                document.getElementById("security_phrase_display").textContent = params.get("security_phrase");
+            }
+        });
+    </script>
 
     <b>THE TOP LEVELS ARE:</b>
     <blockquote>GREAT, THE TOP LEVELS TO SUPPORT ARE GOLD AT $105, SILVER AT $95, AND THE BRONZE AT $75. WHAT'S BEST FOR YOU?</blockquote>
@@ -53,5 +80,8 @@
         <li><a href="#BAILOUT">BAILOUT</a></li>
         <li><a href="#LAST RESORT OR UNDER $25">LAST RESORT OR UNDER $25</a></li>
     </ul>
+</body>
+</html>
+
 
  
