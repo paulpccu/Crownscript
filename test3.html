@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VICIdial Parameter Test</title>
+    <script>
+        function getUrlParams() {
+            let params = {};
+            window.location.search
+                .substring(1)
+                .split("&")
+                .forEach(pair => {
+                    let [key, value] = pair.split("=");
+                    params[key] = decodeURIComponent(value || "");
+                });
+            return params;
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            let params = getUrlParams();
+
+            document.getElementById("security_phrase").textContent = params.security_phrase || "Not Found";
+            document.getElementById("first_name").textContent = params.first_name || "Not Found";
+            document.getElementById("last_name").textContent = params.last_name || "Not Found";
+
+            // Debugging Output
+            console.log("Full URL: ", window.location.href);
+            console.log("Extracted Parameters:", params);
+        });
+    </script>
+</head>
+<body>
+    <h2>VICIdial Customer Info Test</h2>
+    <p><strong>Security Phrase:</strong> <span id="security_phrase"></span></p>
+    <p><strong>First Name:</strong> <span id="first_name"></span></p>
+    <p><strong>Last Name:</strong> <span id="last_name"></span></p>
+
+    <p><strong>Full URL:</strong> <span id="full_url"></span></p>
+</body>
+</html>
