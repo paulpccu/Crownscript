@@ -324,46 +324,29 @@
 </p>
 
 
- <script>
-function getUrlParams() {
-    let params = {};
-    window.location.search
-        .substring(1)
-        .split("&")
-        .forEach(pair => {
-            let [key, value] = pair.split("=");
-            params[key] = decodeURIComponent(value || "");
-        });
-    return params;
-}
+  <script>
+        // Get URL parameters
+        let params = new URLSearchParams(window.location.search);
+        let debugMessage = "<h2>Debugging - Received Parameters:</h2>";
 
-document.addEventListener("DOMContentLoaded", function() {
-    let params = getUrlParams();
-    
-    console.log("URL Parameters:", params); // Debugging output
+        // Loop through all parameters and display them
+        for (let [key, value] of params.entries()) {
+            debugMessage += `<p>${key}: ${value}</p>`;
+        }
 
-    document.querySelectorAll("*").forEach(el => {
-        el.childNodes.forEach(node => {
-            if (node.nodeType === 3) { // Text node
-                node.nodeValue = node.nodeValue
-                    .replace(/--A--security_phrase--B--/g, params.security_phrase || "Unknown Security Phrase")
-                    .replace(/--A--first_name--B--/g, params.first_name || "Unknown First Name")
-                    .replace(/--A--last_name--B--/g, params.last_name || "Unknown Last Name");
+        // Display debugging information at the top
+        document.body.insertAdjacentHTML("afterbegin", debugMessage);
+
+        // Insert data into the correct places in the script
+        document.addEventListener("DOMContentLoaded", function() {
+            if (params.has("first_name")) {
+                document.getElementById("first_name").textContent = params.get("first_name");
+            }
+            if (params.has("last_name")) {
+                document.getElementById("last_name").textContent = params.get("last_name");
+            }
+            if (params.has("security_phrase")) {
+                document.getElementById("security_phrase_display").textContent = params.get("security_phrase");
             }
         });
-    });
-
-    // Display debug info on the page
-    let debugDiv = document.createElement("div");
-    debugDiv.style.background = "#fdd";
-    debugDiv.style.padding = "10px";
-    debugDiv.style.margin = "10px";
-    debugDiv.style.border = "2px solid red";
-    debugDiv.innerHTML = `<strong>Debug Info:</strong><br>
-        Security Phrase: ${params.security_phrase || "Not found"}<br>
-        First Name: ${params.first_name || "Not found"}<br>
-        Last Name: ${params.last_name || "Not found"}`;
-    document.body.insertBefore(debugDiv, document.body.firstChild);
-});
-</script>
-
+    </script>
